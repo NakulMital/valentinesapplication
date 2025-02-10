@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Dearest Adonia ❤️</title>
+    <style>
+        :root {
+            --primary-color: #ff4b6e;
+            --secondary-color: #ff8fa3;
+            --accent-color: #ffd1d9;
+            --text-color: #2c1810;
+            --background-color: #fff5f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 75, 110, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 60%, rgba(255, 143, 163, 0.05) 0%, transparent 20%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1000px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 2s ease-in;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .photo-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            background: white;
+            padding: 1rem;
+        }
+
+        .photo-container:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .photo {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .photo-caption {
+            padding: 1rem;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .message {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--text-color);
+            margin: 3rem 0;
+            padding: 3rem;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .message::before {
+            content: '"';
+            font-size: 5rem;
+            color: var(--accent-color);
+            position: absolute;
+            top: -1rem;
+            left: 1rem;
+            font-family: Georgia, serif;
+        }
+
+        .reasons-section {
+            margin: 3rem 0;
+            padding: 2rem;
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .reason-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .reason-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .reason-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
+        .btn {
+            padding: 1.2rem 3rem;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-yes {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 75, 110, 0.3);
+        }
+
+        .btn-no {
+            background-color: white;
+            color: var(--text-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+            display: none;
+        }
+
+        .celebration-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            animation: modalAppear 0.5s ease-out;
+        }
+
+        .timeline {
+            margin: 4rem 0;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--secondary-color);
+            transform: translateX(-50%);
+        }
+
+        .timeline-event {
+            margin: 2rem 0;
+            position: relative;
+            width: 50%;
+            padding: 1rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-event:nth-child(odd) {
+            left: 0;
+            transform: translateX(-30px);
+        }
+
+        .timeline-event:nth-child(even) {
+            left: 50%;
+            transform: translateX(30px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes modalAppear {
+            from { opacity: 0; transform: translate(-50%, -40%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+
+        .floating-hearts {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        .background-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
+        } 
+    </style>
+</head>
+<body>
+    <div class="background-hearts"></div>
+    <div class="container">
+        <div class="header">
+            <h1>Dear Adonia</h1>
+            <div class="subtitle">Will you be my Valentine?</div>
+        </div>
+
+        <div class="message">
+            <p>Hey Adonia,</p>
+            <p>Every moment we've shared together has been like a beautiful dream come true. Your smile lights up my world, and your love makes every day feel like Valentine's Day.</p>
+            <p>I would love for you to be the one I can spend all my life's valentine's day with!</p>
+        </div>
+
+        <div class="photo-gallery">
+            <div class="photo-container">
+                <img src="IMG_0138.JPG" alt="Our first date" class="photo">
+                <div class="photo-caption">Our very first date!</div>
+            </div>
+            <div class="photo-container">
+                <img src="Image 2.JPG" alt="Our favorite moment" class="photo">
+                <div class="photo-caption">My favourite birthday!</div>
+            </div>
+            <div class="photo-container">
+                <img src="IMG_1342.JPG" alt="A special memory" class="photo">
+                <div class="photo-caption">Us in your room..again</div>
+            </div>
+            <div class="photo-container">
+                <img src="/IMG_1409.JPG" alt="A special memory" class="photo">
+                <div class="photo-caption">Picnic Date!!(I had to take a pic from another day cause picnic had only videos. sorryyy)</div>
+            </div>
+            <div class="photo-container">
+                <img src="/lp_image.HEIC" alt="A special memory" class="photo">
+                <div class="photo-caption">Us on a video call!!</div>
+            </div>
+            <div class="photo-container">
+                <img src="/IMG_0112.JPG" alt="A special memory" class="photo">
+                <div class="photo-caption">Our most famous picture</div>
+            </div>
+        </div>
+
+        <div class="reasons-section">
+            <h2>Why You're Special to Me</h2>
+            <div class="reasons-grid">
+                <div class="reason-card">
+                    <h3>Your Smile</h3>
+                    <p>I love when you smile and laugh and are happy! And I love it more when I am the reason for it.</p>
+                </div>
+                <div class="reason-card">
+                    <h3>Your Kindness</h3>
+                    <p>You are an amazing person who makes me feel so special and I love you so much for that.</p>
+                </div>
+                <div class="reason-card">
+                    <h3>You</h3>
+                    <p>You being you is the best out of the lot. I can write 10000 things here but I wouldnt have space! I love you my baby!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-event">
+                <h3>Me texting you</h3>
+                <p>It was so scary but I am glad I did it!</p>
+            </div>
+            <div class="timeline-event">
+                <h3>First Date</h3>
+                <p>One of the best days of my life</p>
+            </div>
+            <div class="timeline-event">
+                <h3>Today</h3>
+                <p>11 months later, I am asking you to be my Valentine</p>
+            </div>
+        </div>
+
+        <h2>Adonia, Will You Be My Valentine?</h2>
+        
+        <div class="buttons">
+            <button class="btn btn-yes" onclick="sayYes()">Yes, I'd Love To! 💝</button>
+            <button class="btn btn-no" onclick="moveButton(this)">No</button>
+        </div>
+    </div>
+
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="celebration-modal" id="celebrationModal">
+        <h2>💝 Thank You Baby! 💝</h2>
+        <p>I cant wait to make this day the best day ever!</p>
+        <p>I'm in love with you!!</p>
+    </div>
+
+    <script>
+        // Create background hearts
+        function createBackgroundHearts() {
+            const container = document.querySelector('.background-hearts');
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '♡';
+                heart.style.position = 'absolute';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.opacity = 0.3;
+                container.appendChild(heart);
+            }
+        }
+
+        function moveButton(button) {
+            const x = Math.random() * (window.innerWidth - button.offsetWidth);
+            const y = Math.random() * (window.innerHeight - button.offsetHeight);
+            button.style.position = 'fixed';
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+        }
+
+        function sayYes() {
+            const hearts = document.getElementById('hearts');
+            const modal = document.getElementById('celebrationModal');
+            hearts.style.display = 'block';
+            modal.style.display = 'block';
+            
+            // Create floating hearts
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => createHeart(), i * 50);
+            }
+
+            // Play celebration animation
+            document.body.style.overflow = 'hidden';
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-hearts';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            heart.style.opacity = Math.random();
+            heart.style.fontSize = (Math.random() * 30 + 10) + 'px';
+            
+            document.getElementById('hearts').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        // Initialize background hearts on load
+        createBackgroundHearts();
+    </script>
+</body>
+</html>
